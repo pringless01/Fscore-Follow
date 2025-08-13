@@ -1,0 +1,54 @@
+:host { all: initial; }
+.fsx-panel {
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  font-size: 12px; width: 340px; max-height: 70vh;
+  background: #0d1117; color: #e6edf3;
+  border: 1px solid #30363d; border-radius: 12px;
+  overflow: hidden; box-shadow: 0 8px 24px rgba(0,0,0,.3);
+}
+.fsx-header {
+  display: flex; align-items: center; justify-content: space-between;
+  background: #161b22; padding: 8px; cursor: move; user-select: none;
+}
+.fsx-title { font-weight: 700; letter-spacing: .3px; }
+.fsx-actions { display: flex; gap: 6px; align-items: center; }
+.fsx-actions button,.fsx-actions select {
+  background: #0d1117; color: #e6edf3; border: 1px solid #30363d; border-radius: 8px; padding: 4px 8px;
+}
+.fsx-list { overflow: auto; max-height: 54vh; padding: 10px; display: flex; flex-direction: column; gap: 10px; }
+.fsx-item { display:grid; grid-template-columns: 44px 1fr auto; gap:10px; align-items:center; background:#0b0f14; border:1px solid #222; border-radius:12px; padding:10px; }
+.fsx-cell-logo { width:36px; height:36px; border-radius:50%; background:#161b22; border:1px solid #30363d; display:flex; align-items:center; justify-content:center; font-weight:700; color:#79c0ff; }
+.fsx-clock { font-size:12px; }
+.fsx-clock.live { background:#042a12; color:#3fb950; border-color:#1f6f43; }
+.fsx-clock.half { background:#1e1b04; color:#e3b341; border-color:#7a5a00; }
+.fsx-clock.done { background:#1f0b0b; color:#ff7b72; border-color:#7a1f1f; }
+.fsx-clock.idle { background:#0f1319; color:#9ba1a6; border-color:#28313b; }
+.fsx-clock span { font-weight:800; }
+.fsx-team { line-height:1.28; }
+.fsx-team-home { font-weight:700; font-size:13px; }
+.fsx-team-away { font-weight:600; color:#c6d1db; font-size:12.5px; }
+.fsx-item-meta { display:flex; gap:8px; align-items:center; margin-top:6px; color:#9ba1a6; font-size:11px; }
+.fsx-goal { background:#042a12; color:#3fb950; border:1px solid #1f6f43; padding:2px 6px; border-radius:10px; font-weight:700; }
+.fsx-score { font-weight:800; font-size:14px; }
+/* Menü kaldırıldı */
+.fsx-empty { text-align:center; padding:12px; color:#9ba1a6; border:1px dashed #30363d; border-radius:8px; }
+.fsx-footer { padding:6px 8px; font-size:11px; color:#9ba1a6; border-top:1px solid #30363d; }
+.fsx-badge { padding:2px 6px; border-radius:10px; font-size:11px; border:1px solid transparent; }
+.fsx-badge.live { background:#042a12; color:#3fb950; border-color:#1f6f43; }
+.fsx-badge.half { background:#1e1b04; color:#e3b341; border-color:#7a5a00; }
+.fsx-badge.done { background:#1f0b0b; color:#ff7b72; border-color:#7a1f1f; }
+.fsx-badge.upcoming { background:#0b1420; color:#79c0ff; border-color:#255da1; }
+.fsx-badge.soon { background:#06162b; color:#a5d6ff; border-color:#2b5c8b; }
+.fsx-badge.idle { background:#0d1117; color:#8b949e; border-color:#30363d; }
+
+.goal-flash { animation: fsxPulse 0.8s ease-in-out 0s 2; }
+@keyframes fsxPulse {
+  0% { box-shadow: 0 0 0 0 rgba(63,185,80,.8); }
+  100% { box-shadow: 0 0 0 12px rgba(63,185,80,0); }
+}
+
+.fsx-show {
+  position: absolute; right: 0; bottom: 0; transform: translate(50%, 50%);
+  display:none; background:#0d1117; color:#e6edf3; border:1px solid #30363d; border-radius:50%;
+  width:36px; height:36px; cursor:pointer; font-weight:700;
+}

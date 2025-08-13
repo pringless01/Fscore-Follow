@@ -1,0 +1,19 @@
+# Node / tooling caches (in case of future tooling)
+node_modules/
+.DS_Store
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+
+# Build artifacts (if any future build step added)
+dist/
+build/
+
+# VSCode
+.vscode/
+
+# OS
+Thumbs.db
+*.swp
