@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Admin • GameBY</title>
+  <link rel="stylesheet" href="/admin/admin.css" />
+</head>
+<body>
+  <aside class="sidebar">
+    <div class="brand">GameBY Admin</div>
+    <nav>
+      <button data-go="dashboard" class="is-active">Dashboard</button>
+      <button data-go="users">Users</button>
+      <button data-go="contracts">Contracts</button>
+      <button data-go="disputes">Disputes</button>
+      <button data-go="audit">Audit Logs</button>
+      <button data-go="settings">Settings</button>
+    </nav>
+  </aside>
+
+  <main id="view" data-view="dashboard">
+    <section data-panel="dashboard"></section>
+    <section data-panel="users" hidden>
+      <header class="bar">
+        <input id="userSearch" placeholder="email / username" />
+      </header>
+      <div id="usersTable" class="table"></div>
+      <div id="userDrawer" class="drawer" hidden></div>
+    </section>
+    <section data-panel="contracts" hidden></section>
+    <section data-panel="disputes" hidden></section>
+    <section data-panel="audit" hidden>
+      <header class="bar">
+        <input id="auditEvent" placeholder="event type" />
+        <input id="auditUser" placeholder="user id/email" />
+        <label><input type="checkbox" id="auditLive" checked /> live</label>
+      </header>
+      <div id="auditTable" class="table"></div>
+    </section>
+    <section data-panel="settings" hidden></section>
+  </main>
+
+  <div id="toaster" aria-live="polite" class="toaster"></div>
+  <script src="/admin/admin.js" defer></script>
+</body>
+</html>

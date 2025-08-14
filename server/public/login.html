@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Giriş • GameBY</title>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <main class="auth">
+    <section class="card">
+      <img src="/assets/logo.svg" alt="GameBY" class="logo" />
+      <nav class="tabs" aria-label="Kimlik Doğrulama">
+        <button id="tabLogin" class="tab is-active" aria-selected="true">Giriş</button>
+        <button id="tabRegister" class="tab" aria-selected="false">Kayıt Ol</button>
+      </nav>
+
+      <div id="panels" class="panels" data-active="login">
+        <form id="loginForm" autocomplete="on" novalidate>
+          <label for="loginEmail">E-posta
+            <input id="loginEmail" type="email" name="email" required />
+          </label>
+          <label for="loginPassword">Şifre
+            <input id="loginPassword" type="password" name="password" required autocomplete="current-password" />
+          </label>
+          <label class="row" for="rememberMe">
+            <input id="rememberMe" type="checkbox" /> Beni hatırla
+          </label>
+          <button id="loginBtn" type="submit">Giriş yap</button>
+        </form>
+
+        <form id="registerForm" hidden autocomplete="on" novalidate>
+          <label for="regUsername">Kullanıcı adı
+            <input id="regUsername" type="text" name="username" required />
+          </label>
+          <label for="regEmail">E-posta
+            <input id="regEmail" type="email" name="email" required />
+          </label>
+          <label for="regPassword">Şifre
+            <input id="regPassword" type="password" name="password" required autocomplete="new-password" />
+          </label>
+          <button id="registerBtn" type="submit">Kayıt ol</button>
+        </form>
+      </div>
+
+      <p id="msg" role="status" aria-live="polite" class="msg" hidden></p>
+      <footer class="foot">
+        <a href="#" id="forgot">Şifremi unuttum?</a>
+      </footer>
+    </section>
+  </main>
+
+  <script src="/auth.js" defer></script>
+</body>
+</html>
