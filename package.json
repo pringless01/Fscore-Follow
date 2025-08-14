@@ -1,0 +1,14 @@
+{
+  "name": "fscore-follow",
+  "version": "1.0.0",
+  "description": "Kişisel, sessiz bildirimli ve global toolbar’lı Flashscore maç takip uzantısı. DOM Modu önceliklidir; FS sekmesi yoksa yedek Polling devreye girer.",
+  "scripts": {
+    "parse-sample": "node scripts/parse-sample.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "jsdom": "^26.1.0"
+  }
+}

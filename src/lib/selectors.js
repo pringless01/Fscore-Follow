@@ -7,8 +7,8 @@
     MORE: 'div.event__more, div.event__more--static',
   SCORE: 'div.event__scores, div.event__score, .event__part--home, .event__part--away, [data-testid="wcl-matchRowScore"]',
   TIME: 'div.event__time, div.event__stage, .event__stage--block, [data-testid="wcl-matchRowTime"], [data-testid="wcl-matchRowStatus"]',
-    HOME: 'div.event__participant--home, div.event__participant:nth-of-type(1)',
-    AWAY: 'div.event__participant--away, div.event__participant:nth-of-type(2)',
+    HOME: 'div.event__participant--home, div.event__participant:nth-of-type(1), [data-testid="wcl-matchRow-participant"].event__homeParticipant',
+    AWAY: 'div.event__participant--away, div.event__participant:nth-of-type(2), [data-testid="wcl-matchRow-participant"].event__awayParticipant',
     ROWLINK: 'a.eventRowLink[href*="/match/"]'
   };
 
@@ -28,7 +28,7 @@
     let home = FSUtils.getText(row.querySelector(S.HOME));
     let away = FSUtils.getText(row.querySelector(S.AWAY));
     if (!home || !away) {
-      const parts = row.querySelectorAll('div.event__participant');
+      const parts = row.querySelectorAll('div.event__participant, [data-testid="wcl-matchRow-participant"]');
       if (parts.length >= 2) {
         home = home || FSUtils.getText(parts[0]);
         away = away || FSUtils.getText(parts[1]);
@@ -50,7 +50,14 @@
     let t = FSUtils.getText(row.querySelector(S.SCORE));
     let s = FSUtils.regexScore(t);
     if (!s) {
-      // Bazı varyantlarda home ve away part ayrı olabilir.
+      const scoreEls = row.querySelectorAll('[data-testid="wcl-matchRowScore"]');
+      if (scoreEls.length >= 2) {
+        const home = FSUtils.getText(scoreEls[0]);
+        const away = FSUtils.getText(scoreEls[1]);
+        if (home && away && /\d/.test(home) && /\d/.test(away)) s = `${home}-${away}`.replace(/\s+/g, '');
+      }
+    }
+    if (!s) {
       const home = FSUtils.getText(row.querySelector('.event__part--home'));
       const away = FSUtils.getText(row.querySelector('.event__part--away'));
       if (home && away && /\d/.test(home) && /\d/.test(away)) s = `${home}-${away}`.replace(/\s+/g, '');
