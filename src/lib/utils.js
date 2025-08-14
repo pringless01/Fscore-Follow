@@ -6,7 +6,11 @@ const SCORE_RE = /(\d+)\s*[-:]\s*(\d+)/;
 // Dakika sembolü farklı Unicode olabilir (’ ′ '), ayrıca farklı dilde LIVE/canlı ibareleri
 const MIN_STAGE_RE = /\b(FT|HT|[0-9]{1,3}(?:’|′|')|1st|2nd|ET|LIVE|CANLI|PEN)\b/i;
 
+ codex/yeniden-yaplandr-ve-analiz-et-gbf6gv
+const buildFSUtils = () => ({
+
 const FSUtils = {
+ main
     throttle(fn, wait) {
       let t = 0, timer = null, lastArgs = null;
       return (...args) => {
@@ -55,6 +59,10 @@ const FSUtils = {
     isConnected(el) { try { return !!(el && el.isConnected); } catch { return false; } },
     regexScore(s) { const m = (s || '').match(SCORE_RE); return m ? `${m[1]}-${m[2]}` : ''; },
     regexStage(s) { const m = (s || '').match(MIN_STAGE_RE); return m ? m[1] : ''; },
+    parseMinute(stage) {
+      const m = (stage || '').match(/(\d{1,3})/);
+      return m ? parseInt(m[1], 10) : null;
+    },
     isLiveStage(stage) { return !!(stage && /’|1st|2nd|ET|LIVE/i.test(stage)); },
     clamp(n, a, b) { return Math.max(a, Math.min(b, n)); },
 
@@ -66,7 +74,15 @@ const FSUtils = {
       }, { passive: true });
       window.addEventListener('pagehide', () => {/* no-op */}, { passive: true });
     }
-  };
+  });
+
+ codex/yeniden-yaplandr-ve-analiz-et-gbf6gv
+(function (root) {
+  const FSUtils = buildFSUtils();
+  if (typeof module === 'object' && module.exports) module.exports = FSUtils;
+  else root.FSUtils = FSUtils;
+})(typeof globalThis !== 'undefined' ? globalThis : this);
 
 if (typeof module !== 'undefined' && module.exports) module.exports = FSUtils;
 if (typeof window !== 'undefined') window.FSUtils = FSUtils;
+ main

@@ -1,4 +1,8 @@
 const { JSDOM } = require('jsdom');
+ codex/yeniden-yaplandr-ve-analiz-et-gbf6gv
+const FSUtils = require('./utils.js');
+
+ main
 const { S, extractMatchId, extractTeams, extractStage, extractScore, extractUrl, buildTitle, detectSport, extractEventHint } = require('./selectors.js');
 
 /**
@@ -19,7 +23,12 @@ function parseMatches(html, opts = {}) {
       const title = buildTitle(teams);
       const sport = detectSport(row);
       const event = extractEventHint(row);
+codex/yeniden-yaplandr-ve-analiz-et-gbf6gv
+      const minute = FSUtils.parseMinute(stage);
+      return { id, ...teams, score, stage, minute, url, title, sport, ...(event ? { event } : {}) };
+
       return { id, ...teams, score, stage, url, title, sport, ...(event ? { event } : {}) };
+ main
     });
 }
 

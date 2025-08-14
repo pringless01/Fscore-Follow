@@ -1,24 +1,34 @@
 // Flashscore seçiciler ve veri çıkarımı; çoklu selector + fallback.
 // Hem tarayıcı hem Node ortamında kullanılabilir.
 
+ codex/yeniden-yaplandr-ve-analiz-et-gbf6gv
+function factory(FSUtils) {
+=======
 const FSUtils = typeof require === 'function' ? require('./utils.js') : window.FSUtils;
 
+ main
 const S = {
   ROW: 'div.event__match, div.event__match--live, div.event__match--scheduled, div.event__match--twoLine, div.event__match--withRowLink',
   MORE: 'div.event__more, div.event__more--static',
   SCORE: 'div.event__scores, div.event__score, .event__part--home, .event__part--away, [data-testid="wcl-matchRowScore"]',
   TIME: 'div.event__time, div.event__stage, .event__stage--block, [data-testid="wcl-matchRowTime"], [data-testid="wcl-matchRowStatus"]',
+ codex/yeniden-yaplandr-ve-analiz-et-gbf6gv
+
 codex/yeniden-yaplandr-ve-analiz-et-xaur2w
+ main
   HOME: 'div.event__participant--home, div.event__participant:nth-of-type(1), [data-testid="wcl-matchRow-participant"].event__homeParticipant',
   AWAY: 'div.event__participant--away, div.event__participant:nth-of-type(2), [data-testid="wcl-matchRow-participant"].event__awayParticipant',
   ROWLINK: 'a.eventRowLink[href*="/match/"]'
 };
-=======
+ codex/yeniden-yaplandr-ve-analiz-et-gbf6gv
+
+
     HOME: 'div.event__participant--home, div.event__participant:nth-of-type(1), [data-testid="wcl-matchRow-participant"].event__homeParticipant',
     AWAY: 'div.event__participant--away, div.event__participant:nth-of-type(2), [data-testid="wcl-matchRow-participant"].event__awayParticipant',
     ROWLINK: 'a.eventRowLink[href*="/match/"]'
   };
 main
+ main
 
 /** @param {Element} row */
 function extractMatchId(row) {
@@ -29,7 +39,10 @@ function extractMatchId(row) {
     const m = href.match(/\/match\/([A-Za-z0-9]+)\//);
     if (m) return m[1];
   }
+ codex/yeniden-yaplandr-ve-analiz-et-gbf6gv
+
 codex/yeniden-yaplandr-ve-analiz-et-xaur2w
+ main
   return FSUtils.hash((row.textContent || '').slice(0, 200));
 }
 
@@ -49,6 +62,8 @@ function extractTeams(row) {
     if (parts.length >= 2) {
       home = home || cleanParticipantText(parts[0]);
       away = away || cleanParticipantText(parts[1]);
+ codex/yeniden-yaplandr-ve-analiz-et-gbf6gv
+
 
   /** @param {Element} row */
   function extractTeams(row) {
@@ -61,6 +76,7 @@ function extractTeams(row) {
         away = away || FSUtils.getText(parts[1]);
       }
 main
+ main
     }
   }
   home = (home || '').replace(/\s+/g, ' ').trim();
@@ -74,7 +90,10 @@ function extractStage(row) {
   // HT/FT/1st/2nd gibi ibareler öncelikli, değilse tüm metni döndür.
   const tok = FSUtils.regexStage(t);
   return tok || t || '';
+ codex/yeniden-yaplandr-ve-analiz-et-gbf6gv
+
 codex/yeniden-yaplandr-ve-analiz-et-xaur2w
+ main
 }
 
 /** @param {Element} row */
@@ -86,6 +105,8 @@ function extractScore(row) {
     if (scoreEls.length >= 2) {
       const home = FSUtils.getText(scoreEls[0]);
       const away = FSUtils.getText(scoreEls[1]);
+ codex/yeniden-yaplandr-ve-analiz-et-gbf6gv
+
 
   }
   /** @param {Element} row */
@@ -104,6 +125,7 @@ function extractScore(row) {
       const home = FSUtils.getText(row.querySelector('.event__part--home'));
       const away = FSUtils.getText(row.querySelector('.event__part--away'));
 main
+ main
       if (home && away && /\d/.test(home) && /\d/.test(away)) s = `${home}-${away}`.replace(/\s+/g, '');
     }
   }
@@ -125,6 +147,39 @@ function extractUrl(row, base) {
     return new URL(href, origin).href;
   } catch {
     return href;
+ codex/yeniden-yaplandr-ve-analiz-et-gbf6gv
+  }
+}
+
+function buildTitle(teams) {
+  if (!teams.home && !teams.away) return 'Maç';
+  return `${teams.home || 'Home'} — ${teams.away || 'Away'}`;
+}
+
+function detectSport(row) {
+  return row?.closest('[data-sport]')?.getAttribute('data-sport') || 'football';
+}
+
+/** Satır metninden basit olay sinyali (GOAL/KIRMIZI/SARI vb) çıkarır. */
+function extractEventHint(row) {
+  const txt = (row.textContent || '').toUpperCase();
+  if (txt.includes('GOAL')) return { type: 'goal', text: 'Gol' };
+  if (txt.includes('RED CARD')) return { type: 'red', text: 'Kırmızı Kart' };
+  if (txt.includes('YELLOW CARD')) return { type: 'yellow', text: 'Sarı Kart' };
+  return undefined;
+}
+
+return { S, extractMatchId, extractTeams, extractStage, extractScore, extractUrl, buildTitle, detectSport, extractEventHint };
+}
+
+(function (root) {
+  if (typeof module === 'object' && module.exports) {
+    module.exports = factory(require('./utils.js'));
+  } else {
+    root.FSSelectors = factory(root.FSUtils);
+  }
+})(typeof globalThis !== 'undefined' ? globalThis : this);
+
   }
 }
 
@@ -148,4 +203,5 @@ const FSSelectors = { S, extractMatchId, extractTeams, extractStage, extractScor
 
 if (typeof module !== 'undefined' && module.exports) module.exports = FSSelectors;
 if (typeof window !== 'undefined') window.FSSelectors = FSSelectors;
+ main
 
