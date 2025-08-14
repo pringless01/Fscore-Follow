@@ -2,12 +2,11 @@
 // throttle, safeSendMessage, hash, query, text, score regex, visibility lifecycle.
 
 /* global chrome */
-(function () {
-  const SCORE_RE = /(\d+)\s*[-:]\s*(\d+)/;
-  // Dakika sembolü farklı Unicode olabilir (’ ′ '), ayrıca farklı dilde LIVE/canlı ibareleri
-  const MIN_STAGE_RE = /\b(FT|HT|[0-9]{1,3}(?:’|′|')|1st|2nd|ET|LIVE|CANLI|PEN)\b/i;
+const SCORE_RE = /(\d+)\s*[-:]\s*(\d+)/;
+// Dakika sembolü farklı Unicode olabilir (’ ′ '), ayrıca farklı dilde LIVE/canlı ibareleri
+const MIN_STAGE_RE = /\b(FT|HT|[0-9]{1,3}(?:’|′|')|1st|2nd|ET|LIVE|CANLI|PEN)\b/i;
 
-  const FSUtils = {
+const FSUtils = {
     throttle(fn, wait) {
       let t = 0, timer = null, lastArgs = null;
       return (...args) => {
@@ -69,5 +68,5 @@
     }
   };
 
-  window.FSUtils = FSUtils;
-})();
+if (typeof module !== 'undefined' && module.exports) module.exports = FSUtils;
+if (typeof window !== 'undefined') window.FSUtils = FSUtils;
