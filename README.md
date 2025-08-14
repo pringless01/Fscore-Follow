@@ -52,5 +52,9 @@ Kişisel, sessiz bildirimli ve global toolbar’lı Flashscore maç takip uzant�
 4. FS sekmelerini kapatın; yaklaşık 1 dakika içinde polling etkin olup skor değişimi yakalayabilmeli.
 5. Gol olduğunda toolbar satırı kısa süre yeşil highlight olur ve sessiz bildirim çıkar.
 
+## CLI Parser
+- `npm run parse-sample`: `html_ornegi.html` üzerindeki ilk 5 maçı JSON olarak döndürür.
+- `npm run parse <dosya-yolu veya URL> [limit]`: Belirtilen kaynaktan maçları çekip JSON olarak yazar.
+
 ## Yasal Not
 Bu uzantı yalnızca kullanıcının gezdiği sayfanın görünür DOM’unu ve takip edilen maçların detay sayfası HTML’ini makul hız/limitlerde işler. Herhangi bir resmi API kullanılmaz.
