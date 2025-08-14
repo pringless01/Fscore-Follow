@@ -25,15 +25,22 @@ function extractMatchId(row) {
   return FSUtils.hash((row.textContent || '').slice(0, 200));
 }
 
+function cleanParticipantText(el) {
+  if (!el) return '';
+  const clone = el.cloneNode(true);
+  clone.querySelectorAll('.event__important, [data-testid="wcl-matchRowHistory"], [data-testid="wcl-participantMessage"]').forEach(n => n.remove());
+  return FSUtils.getText(clone);
+}
+
 /** @param {Element} row */
 function extractTeams(row) {
-  let home = FSUtils.getText(row.querySelector(S.HOME));
-  let away = FSUtils.getText(row.querySelector(S.AWAY));
+  let home = cleanParticipantText(row.querySelector(S.HOME));
+  let away = cleanParticipantText(row.querySelector(S.AWAY));
   if (!home || !away) {
     const parts = row.querySelectorAll('div.event__participant, [data-testid="wcl-matchRow-participant"]');
     if (parts.length >= 2) {
-      home = home || FSUtils.getText(parts[0]);
-      away = away || FSUtils.getText(parts[1]);
+      home = home || cleanParticipantText(parts[0]);
+      away = away || cleanParticipantText(parts[1]);
     }
   }
   home = (home || '').replace(/\s+/g, ' ').trim();

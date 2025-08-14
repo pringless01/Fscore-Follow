@@ -53,7 +53,7 @@ Kişisel, sessiz bildirimli ve global toolbar’lı Flashscore maç takip uzant�
 5. Gol olduğunda toolbar satırı kısa süre yeşil highlight olur ve sessiz bildirim çıkar.
 
 ## CLI Parser
-- `npm run parse-sample`: `html_ornegi.html` üzerindeki ilk 5 maçı JSON olarak döndürür.
+- `npm run parse-sample`: `html_ornegi.html` üzerindeki ilk 5 maçı JSON olarak döndürür; çıktıda `title`, `sport` ve varsa son olay (`event`) alanları bulunur.
 - `npm run parse <dosya-yolu veya URL> [limit]`: Belirtilen kaynaktan maçları çekip JSON olarak yazar.
 
 ## Yasal Not
