@@ -3,12 +3,22 @@
   "version": "1.0.0",
   "description": "Kişisel, sessiz bildirimli ve global toolbar’lı Flashscore maç takip uzantısı. DOM Modu önceliklidir; FS sekmesi yoksa yedek Polling devreye girer.",
   "scripts": {
+codex/yeniden-yaplandr-ve-analiz-et-gbf6gv
     "parse-sample": "node scripts/parse-sample.js",
     "parse": "node scripts/parse.js"
+
+codex/yeniden-yaplandr-ve-analiz-et-xaur2w
+    "parse-sample": "node scripts/parse-sample.js",
+    "parse": "node scripts/parse.js"
+
+    "parse-sample": "node scripts/parse-sample.js"
+main
+main
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
+codex/yeniden-yaplandr-ve-analiz-et-gbf6gv
   "main": "src/lib/parser.js",
   "bin": {
     "fs-parse": "scripts/parse.js"
@@ -17,6 +27,8 @@
   "engines": {
     "node": ">=18"
   },
+
+ main
   "dependencies": {
     "jsdom": "^26.1.0"
   }

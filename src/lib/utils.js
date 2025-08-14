@@ -6,7 +6,11 @@ const SCORE_RE = /(\d+)\s*[-:]\s*(\d+)/;
 // Dakika sembolü farklı Unicode olabilir (’ ′ '), ayrıca farklı dilde LIVE/canlı ibareleri
 const MIN_STAGE_RE = /\b(FT|HT|[0-9]{1,3}(?:’|′|')|1st|2nd|ET|LIVE|CANLI|PEN)\b/i;
 
+ codex/yeniden-yaplandr-ve-analiz-et-gbf6gv
 const buildFSUtils = () => ({
+
+const FSUtils = {
+ main
     throttle(fn, wait) {
       let t = 0, timer = null, lastArgs = null;
       return (...args) => {
@@ -72,8 +76,13 @@ const buildFSUtils = () => ({
     }
   });
 
+ codex/yeniden-yaplandr-ve-analiz-et-gbf6gv
 (function (root) {
   const FSUtils = buildFSUtils();
   if (typeof module === 'object' && module.exports) module.exports = FSUtils;
   else root.FSUtils = FSUtils;
 })(typeof globalThis !== 'undefined' ? globalThis : this);
+
+if (typeof module !== 'undefined' && module.exports) module.exports = FSUtils;
+if (typeof window !== 'undefined') window.FSUtils = FSUtils;
+ main
