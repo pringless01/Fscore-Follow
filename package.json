@@ -9,6 +9,14 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "main": "src/lib/parser.js",
+  "bin": {
+    "fs-parse": "scripts/parse.js"
+  },
+  "type": "commonjs",
+  "engines": {
+    "node": ">=18"
+  },
   "dependencies": {
     "jsdom": "^26.1.0"
   }

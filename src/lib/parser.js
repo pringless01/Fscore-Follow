@@ -1,4 +1,5 @@
 const { JSDOM } = require('jsdom');
+const FSUtils = require('./utils.js');
 const { S, extractMatchId, extractTeams, extractStage, extractScore, extractUrl, buildTitle, detectSport, extractEventHint } = require('./selectors.js');
 
 /**
@@ -19,7 +20,8 @@ function parseMatches(html, opts = {}) {
       const title = buildTitle(teams);
       const sport = detectSport(row);
       const event = extractEventHint(row);
-      return { id, ...teams, score, stage, url, title, sport, ...(event ? { event } : {}) };
+      const minute = FSUtils.parseMinute(stage);
+      return { id, ...teams, score, stage, minute, url, title, sport, ...(event ? { event } : {}) };
     });
 }
 

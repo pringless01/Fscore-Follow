@@ -55,6 +55,10 @@ const buildFSUtils = () => ({
     isConnected(el) { try { return !!(el && el.isConnected); } catch { return false; } },
     regexScore(s) { const m = (s || '').match(SCORE_RE); return m ? `${m[1]}-${m[2]}` : ''; },
     regexStage(s) { const m = (s || '').match(MIN_STAGE_RE); return m ? m[1] : ''; },
+    parseMinute(stage) {
+      const m = (stage || '').match(/(\d{1,3})/);
+      return m ? parseInt(m[1], 10) : null;
+    },
     isLiveStage(stage) { return !!(stage && /’|1st|2nd|ET|LIVE/i.test(stage)); },
     clamp(n, a, b) { return Math.max(a, Math.min(b, n)); },
 

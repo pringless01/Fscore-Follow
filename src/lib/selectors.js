@@ -93,7 +93,9 @@ function buildTitle(teams) {
   return `${teams.home || 'Home'} — ${teams.away || 'Away'}`;
 }
 
-function detectSport() { return 'football'; }
+function detectSport(row) {
+  return row?.closest('[data-sport]')?.getAttribute('data-sport') || 'football';
+}
 
 /** Satır metninden basit olay sinyali (GOAL/KIRMIZI/SARI vb) çıkarır. */
 function extractEventHint(row) {
