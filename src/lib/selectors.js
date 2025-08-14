@@ -8,10 +8,17 @@ const S = {
   MORE: 'div.event__more, div.event__more--static',
   SCORE: 'div.event__scores, div.event__score, .event__part--home, .event__part--away, [data-testid="wcl-matchRowScore"]',
   TIME: 'div.event__time, div.event__stage, .event__stage--block, [data-testid="wcl-matchRowTime"], [data-testid="wcl-matchRowStatus"]',
+codex/yeniden-yaplandr-ve-analiz-et-xaur2w
   HOME: 'div.event__participant--home, div.event__participant:nth-of-type(1), [data-testid="wcl-matchRow-participant"].event__homeParticipant',
   AWAY: 'div.event__participant--away, div.event__participant:nth-of-type(2), [data-testid="wcl-matchRow-participant"].event__awayParticipant',
   ROWLINK: 'a.eventRowLink[href*="/match/"]'
 };
+=======
+    HOME: 'div.event__participant--home, div.event__participant:nth-of-type(1), [data-testid="wcl-matchRow-participant"].event__homeParticipant',
+    AWAY: 'div.event__participant--away, div.event__participant:nth-of-type(2), [data-testid="wcl-matchRow-participant"].event__awayParticipant',
+    ROWLINK: 'a.eventRowLink[href*="/match/"]'
+  };
+main
 
 /** @param {Element} row */
 function extractMatchId(row) {
@@ -22,6 +29,7 @@ function extractMatchId(row) {
     const m = href.match(/\/match\/([A-Za-z0-9]+)\//);
     if (m) return m[1];
   }
+codex/yeniden-yaplandr-ve-analiz-et-xaur2w
   return FSUtils.hash((row.textContent || '').slice(0, 200));
 }
 
@@ -41,6 +49,18 @@ function extractTeams(row) {
     if (parts.length >= 2) {
       home = home || cleanParticipantText(parts[0]);
       away = away || cleanParticipantText(parts[1]);
+
+  /** @param {Element} row */
+  function extractTeams(row) {
+    let home = FSUtils.getText(row.querySelector(S.HOME));
+    let away = FSUtils.getText(row.querySelector(S.AWAY));
+    if (!home || !away) {
+      const parts = row.querySelectorAll('div.event__participant, [data-testid="wcl-matchRow-participant"]');
+      if (parts.length >= 2) {
+        home = home || FSUtils.getText(parts[0]);
+        away = away || FSUtils.getText(parts[1]);
+      }
+main
     }
   }
   home = (home || '').replace(/\s+/g, ' ').trim();
@@ -54,6 +74,7 @@ function extractStage(row) {
   // HT/FT/1st/2nd gibi ibareler öncelikli, değilse tüm metni döndür.
   const tok = FSUtils.regexStage(t);
   return tok || t || '';
+codex/yeniden-yaplandr-ve-analiz-et-xaur2w
 }
 
 /** @param {Element} row */
@@ -65,6 +86,24 @@ function extractScore(row) {
     if (scoreEls.length >= 2) {
       const home = FSUtils.getText(scoreEls[0]);
       const away = FSUtils.getText(scoreEls[1]);
+
+  }
+  /** @param {Element} row */
+  function extractScore(row) {
+    let t = FSUtils.getText(row.querySelector(S.SCORE));
+    let s = FSUtils.regexScore(t);
+    if (!s) {
+      const scoreEls = row.querySelectorAll('[data-testid="wcl-matchRowScore"]');
+      if (scoreEls.length >= 2) {
+        const home = FSUtils.getText(scoreEls[0]);
+        const away = FSUtils.getText(scoreEls[1]);
+        if (home && away && /\d/.test(home) && /\d/.test(away)) s = `${home}-${away}`.replace(/\s+/g, '');
+      }
+    }
+    if (!s) {
+      const home = FSUtils.getText(row.querySelector('.event__part--home'));
+      const away = FSUtils.getText(row.querySelector('.event__part--away'));
+main
       if (home && away && /\d/.test(home) && /\d/.test(away)) s = `${home}-${away}`.replace(/\s+/g, '');
     }
   }
