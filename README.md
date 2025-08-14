@@ -54,7 +54,7 @@ Kişisel, sessiz bildirimli ve global toolbar’lı Flashscore maç takip uzant�
 
 ## CLI Parser
 - `npm run parse-sample`: `html_ornegi.html` üzerindeki ilk 5 maçı JSON olarak döndürür; çıktıda `title`, `sport` ve varsa son olay (`event`) alanları bulunur.
-- `npm run parse <dosya-yolu veya URL> [limit]`: Belirtilen kaynaktan maçları çekip JSON olarak yazar.
+- `node scripts/parse.js <dosya-yolu veya URL> [--limit N] [--base URL]`: Kaynağı diskteki bir dosyadan veya ağ üzerindeki bir URL'den okur. `--limit` parametresi döndürülecek maç sayısını, `--base` ise bağlantıların oluşturulacağı kök adresi belirler (varsayılan olarak girdinin kendisi kullanılır).
 
 ## Yasal Not
 Bu uzantı yalnızca kullanıcının gezdiği sayfanın görünür DOM’unu ve takip edilen maçların detay sayfası HTML’ini makul hız/limitlerde işler. Herhangi bir resmi API kullanılmaz.
