@@ -1,0 +1,60 @@
+/* content/goal.css - Neon overlay and shake */
+.fscore-goal-overlay {
+  position: fixed;
+  z-index: 2147483647;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0,0,0,0.35);
+  pointer-events: none;
+}
+.fscore-goal-overlay .inner {
+  color: #39ff14;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+  text-align: center;
+  text-shadow: 0 0 8px #39ff14, 0 0 16px #39ff14, 0 0 24px #39ff14;
+  border: 3px solid #39ff14;
+  padding: 18px 26px;
+  border-radius: 10px;
+  background: rgba(0,0,0,0.6);
+  animation: neonPulse 0.8s ease-in-out infinite alternate;
+}
+.fscore-goal-overlay .inner .l1 {
+  font-size: 36px;
+  font-weight: 800;
+  letter-spacing: 2px;
+}
+.fscore-goal-overlay .inner .l2 {
+  font-size: 22px;
+  margin-top: 6px;
+}
+.fscore-goal-overlay .inner .l3 {
+  font-size: 16px;
+  margin-top: 4px;
+  opacity: 0.9;
+}
+.fscore-goal-overlay .inner .type {
+  color: #fff;
+  background: #ff007a;
+  padding: 2px 6px;
+  margin-left: 8px;
+  border-radius: 6px;
+}
+
+@keyframes neonPulse {
+  from { box-shadow: 0 0 6px #39ff14, 0 0 12px #39ff14; }
+  to { box-shadow: 0 0 14px #39ff14, 0 0 28px #39ff14; }
+}
+
+/* Shake border for penalty shootouts etc. Add class from scripting if needed */
+.fscore-goal-overlay .inner.shake {
+  animation: shake 0.4s linear infinite, neonPulse 0.8s ease-in-out infinite alternate;
+}
+@keyframes shake {
+  0% { transform: translate(0, 0); }
+  25% { transform: translate(2px, 0); }
+  50% { transform: translate(0, 0); }
+  75% { transform: translate(-2px, 0); }
+  100% { transform: translate(0, 0); }
+}

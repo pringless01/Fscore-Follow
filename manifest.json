@@ -1,108 +1,58 @@
 {
   "manifest_version": 3,
-  "name": "Flashscore Takipçi (Kişisel) — MV3",
-  "version": "1.1.1",
-  "description": "Flashscore maçlarını DOM Modu ile anlık takip et; yedekte hafif polling. Sessiz bildirim, global toolbar, filtreler, geçmiş ve JSON export.",
-  "action": {
-    "default_title": "Flashscore Takipçi",
-    "default_popup": "src/popup.html"
-  },
+  "name": "Fscore Follow",
+  "version": "1.2.0",
+  "description": "Flashscore maç takip: DOM izleme, golde neon overlay ve opsiyonel bildirim, timeline zenginleştirme.",
   "icons": {
     "16": "assets/icons/16.png",
     "32": "assets/icons/32.png",
+    "48": "assets/icons/48.png",
     "128": "assets/icons/128.png"
   },
+  "action": {
+    "default_popup": "popup/index.html"
+  },
+  "background": {
+    "service_worker": "sw/index.js",
+    "type": "module"
+  },
   "permissions": [
-    "storage",
+    "offscreen",
     "notifications",
-    "alarms",
+    "storage",
     "scripting",
     "activeTab"
   ],
   "host_permissions": [
-  "https://www.flashscore.com/*",
-  "https://*.flashscore.com/*",
-    "https://*.flashscore.co.uk/*",
-    "https://*.flashscore.com.tr/*",
-    "https://*.flashscore.de/*",
-    "https://*.flashscore.pl/*",
-    "https://*.flashscore.es/*",
-    "https://*.flashscore.fr/*",
-    "https://*.flashscore.it/*",
-    "https://*.flashscore.nl/*",
-    "https://*.flashscore.pt/*",
-    "https://*.flashscore.cz/*",
-    "https://*.flashscore.sk/*",
-    "https://*.flashscore.ro/*",
-    "https://*.flashscore.hu/*",
-    "https://*.flashscore.gr/*",
-    "https://*.flashscore.dk/*",
-    "https://*.flashscore.se/*",
-    "https://*.flashscore.no/*",
-    "https://*.flashscore.fi/*",
-    "https://*.flashscore.ie/*",
-    "https://*.flashscore.be/*",
-    "https://*.livesport.eu/*"
+    "*://*.flashscore.com/*",
+    "*://*.flashscoreusa.com/*",
+    "*://*.flashscore.info/*"
   ],
-  "background": {
-    "service_worker": "src/background.js",
-    "type": "module"
-  },
   "content_scripts": [
     {
       "matches": [
-        "https://*.flashscore.com/*",
-        "https://*.flashscore.co.uk/*",
-        "https://*.flashscore.com.tr/*",
-        "https://*.flashscore.de/*",
-        "https://*.flashscore.pl/*",
-        "https://*.flashscore.es/*",
-        "https://*.flashscore.fr/*",
-        "https://*.flashscore.it/*",
-        "https://*.flashscore.nl/*",
-        "https://*.flashscore.pt/*",
-        "https://*.flashscore.cz/*",
-        "https://*.flashscore.sk/*",
-        "https://*.flashscore.ro/*",
-        "https://*.flashscore.hu/*",
-        "https://*.flashscore.gr/*",
-        "https://*.flashscore.dk/*",
-        "https://*.flashscore.se/*",
-        "https://*.flashscore.no/*",
-        "https://*.flashscore.fi/*",
-        "https://*.flashscore.ie/*",
-        "https://*.flashscore.be/*"
+        "*://*.flashscore.com/*",
+        "*://*.flashscoreusa.com/*",
+        "*://*.flashscore.info/*"
       ],
-      "all_frames": true,
-      "run_at": "document_idle",
-      "js": [
-        "src/lib/utils.js",
-        "src/lib/selectors.js",
-        "src/content/flashscore.js"
-      ]
-    },
-    {
-      "matches": ["<all_urls>"],
-      "run_at": "document_idle",
-      "js": [
-        "src/lib/utils.js",
-        "src/content/scorepanel.js"
-      ]
+      "js": ["content/dom-watch.js", "content/goal-ui.js"],
+      "css": ["content/goal.css"],
+      "run_at": "document_idle"
     }
   ],
   "web_accessible_resources": [
     {
       "resources": [
-  "src/ui/scorepanel.css",
-        "assets/icons/16.png",
-        "assets/icons/32.png",
-        "assets/icons/128.png"
+        "offscreen.html",
+        "content/goal.css",
+        "assets/icons/*"
       ],
-      "matches": ["<all_urls>"]
+      "matches": [
+        "*://*.flashscore.com/*",
+        "*://*.flashscoreusa.com/*",
+        "*://*.flashscore.info/*",
+        "chrome-extension://*/*"
+      ]
     }
-  ],
-  "options_ui": {
-    "page": "src/popup.html",
-    "open_in_tab": false
-  }
+  ]
 }
